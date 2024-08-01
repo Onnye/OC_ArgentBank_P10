@@ -1,10 +1,13 @@
 import Navigation from "../composents/Navigation";
-import "../assets/css/main.css";
+import Hero from "../composents/Hero";
 
 function HomePage() {
   return (
     <div>
       <Navigation />
+      <main>
+        <Hero />
+      </main>
     </div>
   );
 }
