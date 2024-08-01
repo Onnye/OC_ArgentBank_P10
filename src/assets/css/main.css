@@ -6,25 +6,38 @@ html {
   color: #2c3e50;
 }
 
+/* BODY */
 body {
   margin: 0;
+}
+
+.app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+.content {
+  flex: 1;
+  background-color: white; /* Couleur de fond par défaut */
+}
+
+.login-background {
+  background-color: #12002b; /* Couleur de fond spécifique pour la page de login */
+}
+
 .sr-only {
   border: 0 !important;
-  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  clip: rect(1px, 1px, 1px, 1px) !important;
   -webkit-clip-path: inset(50%) !important;
-  clip-path: inset(50%) !important; /* 2 */
+  clip-path: inset(50%) !important;
   height: 1px !important;
   margin: -1px !important;
   overflow: hidden !important;
   padding: 0 !important;
   position: absolute !important;
   width: 1px !important;
-  white-space: nowrap !important; /* 3 */
+  white-space: nowrap !important;
 }
 
 .main-nav {
@@ -155,6 +168,9 @@ body {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+  border: none;
 }
 
 .sign-in-content {
@@ -167,7 +183,7 @@ body {
 }
 
 .sign-in-icon {
-  font-size: 5rem;
+  font-size: 1rem;
 }
 
 .input-remember {
