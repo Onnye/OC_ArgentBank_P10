@@ -1,6 +1,7 @@
 import Navigation from "../composents/Navigation";
 import Hero from "../composents/Hero";
 import Feature from "../composents/Feature";
+import Footer from "../composents/Footer";
 import chatIcon from "../assets/img/icon-chat.png";
 import moneyIcon from "../assets/img/icon-money.png";
 import securityIcon from "../assets/img/icon-security.png";
@@ -30,6 +31,7 @@ function HomePage() {
           />
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
