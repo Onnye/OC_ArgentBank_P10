@@ -4,9 +4,9 @@ import chatIcon from "../assets/img/icon-chat.png";
 import moneyIcon from "../assets/img/icon-money.png";
 import securityIcon from "../assets/img/icon-security.png";
 
-function HomePage() {
+function Landing() {
   return (
-    <main>
+    <main className="main">
       <Hero />
       <section className="features">
         <h2 className="sr-only">Features</h2>
@@ -30,4 +30,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Landing;

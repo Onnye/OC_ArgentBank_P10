@@ -11,6 +11,10 @@ body {
   margin: 0;
 }
 
+.main {
+  flex: 1;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -22,7 +26,7 @@ body {
   background-color: white; /* Couleur de fond par défaut */
 }
 
-.login-background {
+.dark-background {
   background-color: #12002b; /* Couleur de fond spécifique pour la page de login */
 }
 
