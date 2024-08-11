@@ -49,7 +49,7 @@ export const fetchUserProfile = (token, redirectTo, dispatch) => {
   })
     .then((userData) => {
       dispatch(login({ ...userData.body, token }));
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", token); // Stocke le token dans localStorage pour une connexion persistante
 
       redirectTo("/profile");
     })
@@ -57,4 +57,12 @@ export const fetchUserProfile = (token, redirectTo, dispatch) => {
       console.error("Erreur lors de la récupération du profil :", error);
       alert("Une erreur est survenue lors de la récupération du profil.");
     });
+};
+
+// Fonction pour restaurer l'état lors du chargement de l'application
+export const restoreSession = (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    fetchUserProfile(token, () => {}, dispatch);
+  }
 };
