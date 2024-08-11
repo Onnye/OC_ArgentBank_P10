@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authenticateUser } from "../redux/actions";
 
@@ -8,13 +8,19 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const authStatus = useSelector((state) => state.user.status);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const loginData = { email, password };
 
-    // Appel de la fonction authenticateUser qui gère la logique de connexion
-    authenticateUser(loginData, navigate, dispatch);
+    dispatch(authenticateUser(loginData)).then((result) => {
+      if (authenticateUser.fulfilled.match(result)) {
+        navigate("/profile");
+      } else {
+        alert("Erreur lors de la connexion : " + result.payload);
+      }
+    });
   };
 
   return (
@@ -43,8 +49,12 @@ function Login() {
               required
             />
           </div>
-          <button type="submit" className="sign-in-button">
-            Sign In
+          <button
+            type="submit"
+            className="sign-in-button"
+            disabled={authStatus === "loading"}
+          >
+            {authStatus === "loading" ? "Loading..." : "Sign In"}
           </button>
         </form>
       </section>

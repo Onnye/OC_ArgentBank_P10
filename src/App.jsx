@@ -9,7 +9,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    restoreSession(dispatch); // Restaurer l'état de l'utilisateur au démarrage
+    dispatch(restoreSession()); // Restaurer l'état de l'utilisateur au démarrage
   }, [dispatch]);
 
   return (
