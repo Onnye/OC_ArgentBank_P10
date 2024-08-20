@@ -55,6 +55,36 @@ export const authenticateUser = createAsyncThunk(
   }
 );
 
+// Créer une action asynchrone pour mettre à jour le nom d'utilisateur
+export const updateUserName = createAsyncThunk(
+  "user/updateUserName",
+  async (newUserName, { getState, rejectWithValue }) => {
+    const state = getState();
+    const token = state.user.token;
+
+    try {
+      const data = await apiFetch(PROFILE_URL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userName: newUserName }),
+      });
+
+      // Vérifier si l'API a retourné une erreur
+      if (data.error) {
+        throw new Error(data.error.message || "Failed to update user name");
+      }
+
+      return data.body.userName;
+    } catch (error) {
+      console.error("Error in updateUserName:", error);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // Créer une action asynchrone pour restaurer la session utilisateur
 export const restoreSession = createAsyncThunk(
   "user/restoreSession",

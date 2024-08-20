@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authenticateUser } from "./actions";
+import { authenticateUser, updateUserName } from "./actions";
 
 const initialState = {
   email: "",
@@ -38,10 +38,12 @@ export const userSlice = createSlice({
       .addCase(authenticateUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+      })
+      .addCase(updateUserName.fulfilled, (state, action) => {
+        state.userName = action.payload;
       });
   },
 });
 
 export const { login, logout } = userSlice.actions;
-
 export default userSlice.reducer;

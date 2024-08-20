@@ -7,7 +7,7 @@ function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSignedIn = !!useSelector((state) => state.user.token);
-  const user = useSelector((state) => state.user);
+  const userName = useSelector((state) => state.user.userName);
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -30,7 +30,7 @@ function Navigation() {
           <>
             <Link className="main-nav-item" to="/profile">
               <i className="fa fa-user-circle"></i>
-              {user.firstName}
+              {userName}
             </Link>
             <Link className="main-nav-item" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i>
