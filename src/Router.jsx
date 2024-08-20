@@ -3,6 +3,7 @@ import App from "./App.jsx";
 import Profile from "./pages/Profile.jsx";
 import Login from "./pages/Login.jsx";
 import Landing from "./pages/Landing.jsx";
+import PrivateRoute from "./utils/PrivateRoute.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -19,10 +20,9 @@ export const router = createBrowserRouter([
         element: <Login />,
         errorElement: <div>Erreur 404, Login page not found</div>,
       },
-
       {
         path: "/profile",
-        element: <Profile />,
+        element: <PrivateRoute element={<Profile />} />,
         errorElement: <div>Erreur 404, Profile page not found</div>,
       },
     ],
