@@ -59,8 +59,15 @@ function Profile() {
                 />
               </div>
               <div className="button-container">
-                <button onClick={handleSaveClick}>Save</button>
-                <button onClick={() => setIsEditing(false)}>Cancel</button>
+                <button className="edit-button" onClick={handleSaveClick}>
+                  Save
+                </button>
+                <button
+                  className="edit-button"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           ) : (
