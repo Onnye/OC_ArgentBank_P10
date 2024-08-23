@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/img/argentBankLogo.png";
+import logo from "../assets/img/argentBankLogo.webp";
 import { logout } from "../redux/userSlice";
 
 function Navigation() {
@@ -22,6 +22,8 @@ function Navigation() {
           className="main-nav-logo-image"
           src={logo}
           alt="Argent Bank Logo"
+          width="200px"
+          height="auto"
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
