@@ -69,7 +69,7 @@ paths:
       # - application/json
       responses:
         "200":
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: "#/definitions/ApiResponse"
         "400":
@@ -101,6 +101,144 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
+
+  /transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get all transactions for the current month
+      description: Retrieve a list of all transactions grouped by account for the current month.
+      parameters:
+        - in: query
+          name: accountId
+          type: string
+          required: false
+          description: Filter transactions by account ID
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transactions for the current month retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Transaction"
+          examples:
+            application/json:
+              - accountId: "string"
+                transactionId: "string"
+                date: "2024-08-29"
+                description: "Shopping"
+                amount: 100.50
+                balance: 1000.75
+                type: "expense"
+                category: "Food"
+                note: "Groceries"
+              - accountId: "string"
+                transactionId: "string"
+                date: "2024-08-28"
+                description: "Salary"
+                amount: 200.00
+                balance: 800.75
+                type: "income"
+                category: "Salary"
+                note: "August salary"
+        "400":
+          description: Invalid Fields
+        "500":
+          description: Internal Server Error
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Get transaction details
+      description: Retrieve the details of a specific transaction by its ID
+      parameters:
+        - in: path
+          name: transactionId
+          type: string
+          required: true
+          description: The ID of the transaction to retrieve
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: "#/definitions/TransactionDetail"
+        "400":
+          description: Invalid Fields
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Server Error
+
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Update transaction details
+      description: Update the details of a specific transaction (category, note)
+      parameters:
+        - in: path
+          name: transactionId
+          type: string
+          required: true
+          description: The ID of the transaction to update
+        - in: body
+          name: body
+          description: Updated transaction details
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionUpdate"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Transaction updated successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 0
+              message:
+                type: string
+                example: "Transaction updated successfully"
+              body:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                  transactionId:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  description:
+                    type: string
+                  amount:
+                    type: number
+                    format: float
+                  balance:
+                    type: number
+                    format: float
+                  category:
+                    type: string
+                  note:
+                    type: string
+        "400":
+          description: Invalid Fields
+        "404":
+          description: Transaction not found
+        "500":
+          description: Internal Server Error
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -174,6 +312,12 @@ definitions:
       balance:
         type: number
         format: float
+      type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
   TransactionDetail:
     type: object
     properties:
